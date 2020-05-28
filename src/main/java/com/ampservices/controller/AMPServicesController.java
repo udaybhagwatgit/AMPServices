@@ -28,7 +28,7 @@ public class AMPServicesController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/test")
-	public ResponseEntity<String> signUpUser(@RequestBody final SignupRequestModel signupRequest) {
+	public ResponseEntity<String> testUser(@RequestBody final SignupRequestModel signupRequest) {
 		String responseObject = "Hello AMP Test";
 		ResponseEntity<String> responseEntity = new ResponseEntity<String>(responseObject, HttpStatus.OK);
 		return responseEntity;
