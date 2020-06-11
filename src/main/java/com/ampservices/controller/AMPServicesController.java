@@ -22,9 +22,9 @@ public class AMPServicesController {
 
 	@CrossOrigin()
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp")
-	public ResponseEntity<String> signUpUser(SignupRequestModel signupRequest) {
-		String responseObject = service.registerUser(signupRequest);
-		ResponseEntity<String> responseEntity = new ResponseEntity<String>(responseObject, HttpStatus.OK);
+	public ResponseEntity<Map<String, String>> signUpUser(SignupRequestModel signupRequest) {
+		Map<String, String> responseObject = service.registerUser(signupRequest);
+		ResponseEntity<Map<String, String>> responseEntity = new ResponseEntity<Map<String, String>>(responseObject, HttpStatus.OK);
 		return responseEntity;
 	}
 	
