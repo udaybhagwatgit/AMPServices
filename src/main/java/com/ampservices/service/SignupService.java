@@ -16,7 +16,7 @@ public class SignupService {
 	@Autowired RegisteredUsersRepository registeredUsersRepository;
 	@Autowired LatestUserIdRepository latestUserIdRepository;
 	
-	public Map<String, String> registerUser(SignupRequestModel signupRequest) {
+	public SignUpResponseModel registerUser(SignupRequestModel signupRequest) {
 		RegisteredUsers registeredUsers = new RegisteredUsers();
 		registeredUsers.setUserName(signupRequest.getUserName());
 		registeredUsers.setEmailId(signupRequest.getEmailId());
