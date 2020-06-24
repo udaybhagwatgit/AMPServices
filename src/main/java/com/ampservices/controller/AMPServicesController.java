@@ -23,7 +23,7 @@ public class AMPServicesController {
 	@Autowired
 	SignupService service;
 
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = "application/json")
 	public ResponseEntity<Map<String, String>> signUpUser(SignupRequestModel signupRequest) {
 		Map<String, String> responseObject = service.registerUser(signupRequest);
