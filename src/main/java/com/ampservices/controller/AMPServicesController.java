@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,12 +23,21 @@ public class AMPServicesController {
 	@Autowired
 	SignupService service;
 
-	@CrossOrigin()
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = "application/json")
-	public Map<String, String> signUpUser(SignupRequestModel signupRequest) {
+	public ResponseEntity<Map<String, String>> signUpUser(SignupRequestModel signupRequest) {
 		Map<String, String> responseObject = service.registerUser(signupRequest);
-		ResponseEntity<Map<String, String>> responseEntity = new ResponseEntity<Map<String, String>>(responseObject, HttpStatus.OK);
-		return responseObject;
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "origin, content-type, accept, x-requested-with");
+		headers.add(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
+		return ResponseEntity.ok()
+		   .headers(headers)
+		   .body(responseObject);
+		/*ResponseEntity<Map<String, String>> responseEntity = new ResponseEntity<Map<String, String>>(responseObject,
+				HttpStatus.OK);
+		return responseObject;*/
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/ampService/test")
