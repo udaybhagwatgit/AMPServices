@@ -1,13 +1,11 @@
 package com.ampservices.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ampservices.dao.LatestUserId;
 import com.ampservices.dao.RegisteredUsers;
+import com.ampservices.model.SignUpResponseModel;
 import com.ampservices.model.SignupRequestModel;
 import com.ampservices.mongorepositories.LatestUserIdRepository;
 import com.ampservices.mongorepositories.RegisteredUsersRepository;
@@ -19,7 +17,6 @@ public class SignupService {
 	@Autowired LatestUserIdRepository latestUserIdRepository;
 	
 	public Map<String, String> registerUser(SignupRequestModel signupRequest) {
-		
 		RegisteredUsers registeredUsers = new RegisteredUsers();
 		registeredUsers.setUserName(signupRequest.getUserName());
 		registeredUsers.setEmailId(signupRequest.getEmailId());
@@ -33,9 +30,11 @@ public class SignupService {
 		
 		latestUserIdRepository.save(latestUserId);
 		registeredUsersRepository.save(registeredUsers);
-		Map<String, String> resp = new HashMap<>();
-		resp.put("message", "Thanks for registering "+registeredUsers.getUserName()+". Your user id is "+newUserId);
-		return resp;
+		SignUpResponseModel responseModel = new SignUpResponseModel();
+		responseModel.setUserName(registeredUsers.getUserName());
+		responseModel.setLatestUserId(newUserId);
+		
+		return responseModel;
 	}
 
 }
