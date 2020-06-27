@@ -15,14 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ampservices.dao.ProductInfo;
-import com.ampservices.dao.SurveyResponse;
 import com.ampservices.model.SignUpResponseModel;
 import com.ampservices.model.SignupRequestModel;
-import com.ampservices.model.SurveyRequest;
-import com.ampservices.service.ProductService;
-import com.ampservices.service.SignupService;
-import com.ampservices.service.SurveyService;
 
 @RestController
 public class AMPServicesController {
