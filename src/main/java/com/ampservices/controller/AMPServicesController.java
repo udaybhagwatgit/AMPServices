@@ -1,22 +1,28 @@
 package com.ampservices.controller;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ampservices.dao.ProductInfo;
+import com.ampservices.dao.SurveyResponse;
 import com.ampservices.model.SignUpResponseModel;
 import com.ampservices.model.SignupRequestModel;
+import com.ampservices.model.SurveyRequest;
+import com.ampservices.service.ProductService;
 import com.ampservices.service.SignupService;
+import com.ampservices.service.SurveyService;
 
 @RestController
 public class AMPServicesController {
@@ -26,12 +32,12 @@ public class AMPServicesController {
 
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = "application/json")
-	public ResponseEntity<SignUpResponseModel> signUpUser(SignupRequestModel signupRequest) {
+	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody SignUpResponseModel signUpUser(SignupRequestModel signupRequest) {
 		SignUpResponseModel responseObject = service.registerUser(signupRequest);
 		ResponseEntity<SignUpResponseModel> responseEntity = new ResponseEntity<SignUpResponseModel>(responseObject,
 				HttpStatus.OK);
-		return responseEntity;
+		return responseObject;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/ampService/test")
