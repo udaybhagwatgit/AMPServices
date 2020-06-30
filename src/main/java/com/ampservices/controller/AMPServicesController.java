@@ -28,7 +28,7 @@ public class AMPServicesController {
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody SignUpResponseModel signUpUser(SignupRequestModel signupRequest) {
+	public ResponseEntity<SignUpResponseModel> signUpUser(SignupRequestModel signupRequest) {
 		SignUpResponseModel responseObject = service.registerUser(signupRequest);
 		ResponseEntity<SignUpResponseModel> responseEntity = new ResponseEntity<SignUpResponseModel>(responseObject,
 				HttpStatus.OK);
