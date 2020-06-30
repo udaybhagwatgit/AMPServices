@@ -32,7 +32,7 @@ public class AMPServicesController {
 		SignUpResponseModel responseObject = service.registerUser(signupRequest);
 		ResponseEntity<SignUpResponseModel> responseEntity = new ResponseEntity<SignUpResponseModel>(responseObject,
 				HttpStatus.OK);
-		return responseObject;
+		return responseEntity;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/ampService/test")
