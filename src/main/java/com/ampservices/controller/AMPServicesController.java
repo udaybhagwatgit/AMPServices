@@ -48,7 +48,7 @@ public class AMPServicesController {
 	public void corsHeaders(HttpServletResponse response) {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-		response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
+		response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with, AMP-Access-Control-Allow-Source-Origin");
 		response.addHeader("Access-Control-Max-Age", "3600");
 	}
 }
