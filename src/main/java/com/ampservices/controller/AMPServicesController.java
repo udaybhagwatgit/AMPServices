@@ -26,7 +26,7 @@ public class AMPServicesController {
 	SignupService service;
 
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@CrossOrigin(origins = "https://amp.gmail.dev", allowedHeaders = "AMP-Access-Control-Allow-Source-Origin")
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SignUpResponseModel> signUpUser(SignupRequestModel signupRequest) {
 		SignUpResponseModel responseObject = service.registerUser(signupRequest);
@@ -48,7 +48,7 @@ public class AMPServicesController {
 	public void corsHeaders(HttpServletResponse response) {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-		response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with, AMP-Access-Control-Allow-Source-Origin");
+		response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
 		response.addHeader("Access-Control-Max-Age", "3600");
 	}
 }
