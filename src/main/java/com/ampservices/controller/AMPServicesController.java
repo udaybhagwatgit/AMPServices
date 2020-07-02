@@ -26,7 +26,7 @@ public class AMPServicesController {
 	SignupService service;
 
 	
-	@CrossOrigin(origins = "https://amp.gmail.dev", allowedHeaders = "AMP-Access-Control-Allow-Source-Origin")
+	@CrossOrigin(origins = "*", allowedHeaders = "AMP-Access-Control-Allow-Source-Origin")
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SignUpResponseModel> signUpUser(SignupRequestModel signupRequest) {
 		SignUpResponseModel responseObject = service.registerUser(signupRequest);
