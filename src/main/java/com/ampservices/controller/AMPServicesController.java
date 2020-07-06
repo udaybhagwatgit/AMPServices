@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,14 @@ public class AMPServicesController {
 		SignUpResponseModel responseObject = service.registerUser(signupRequest);
 		ResponseEntity<SignUpResponseModel> responseEntity = new ResponseEntity<SignUpResponseModel>(responseObject,
 				HttpStatus.OK);
-		return responseEntity;
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		headers.add("AMP-Access-Control-Allow-Source-Origin", "*");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "origin, content-type, accept, x-requested-with, AMP-Access-Control-Allow-Source-Origin");
+		headers.add(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
+		return ResponseEntity.ok().headers(headers).body(responseObject);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/ampService/test")
