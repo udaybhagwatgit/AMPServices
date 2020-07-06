@@ -34,10 +34,11 @@ public class AMPServicesController {
 				HttpStatus.OK);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-		headers.add("AMP-Access-Control-Allow-Source-Origin", "*");
+		headers.add("AMP-Access-Control-Allow-Source-Origin", "sameer.patil2@qa.amp.epsilon.com");
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "origin, content-type, accept, x-requested-with, AMP-Access-Control-Allow-Source-Origin");
+		headers.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "AMP-Access-Control-Allow-Source-Origin");
 		headers.add(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
 		return ResponseEntity.ok().headers(headers).body(responseObject);
 	}
