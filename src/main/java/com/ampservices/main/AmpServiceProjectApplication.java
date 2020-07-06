@@ -20,15 +20,4 @@ public class AmpServiceProjectApplication {
 		SpringApplication.run(AmpServiceProjectApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurerAdapter() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*").allowedHeaders("AMP-Access-Control-Allow-Source-Origin")
-						.exposedHeaders("AMP-Access-Control-Allow-Source-Origin")
-						.allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE").allowCredentials(true).maxAge(4800);
-			}
-		};
-	}
 }
