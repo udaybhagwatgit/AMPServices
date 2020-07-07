@@ -26,11 +26,12 @@ public class AMPFilter implements Filter{
 			throws IOException, ServletException {
 		 HttpServletResponse httpServletResponse=(HttpServletResponse)response;
 	        httpServletResponse.setHeader("Access-Control-Allow-Origin","*");
-	        httpServletResponse.setHeader("AMP-Access-Control-Allow-Source-Origin", "sameer.patil2@qa.amp.epsilon.com");
+	        httpServletResponse.setHeader("AMP-Access-Control-Allow-Source-Origin", "*");
+		httpServletResponse.setHeader("Access-Control-Expose-Headers", "AMP-Access-Control-Allow-Source-Origin");
 	        httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
 	        httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 	        httpServletResponse.setHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with, AMP-Access-Control-Allow-Source-Origin");
-	        httpServletResponse.setHeader("Access-Control-Expose-Headers", "AMP-Access-Control-Allow-Source-Origin");
+	        
 	        chain.doFilter(request, response);		
 	}
 
