@@ -24,15 +24,20 @@ public class AMPFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		 HttpServletResponse httpServletResponse=(HttpServletResponse)response;
-	        httpServletResponse.setHeader("Access-Control-Allow-Origin","*");
-	        httpServletResponse.setHeader("AMP-Access-Control-Allow-Source-Origin", "sameer.patil2@qa.amp.epsilon.com");
+		String channel = request.getParameter("channel");
+		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+		if (channel.equals("gmail")) {
+			httpServletResponse.setHeader("AMP-Access-Control-Allow-Source-Origin", "sameer.patil2@qa.amp.epsilon.com");
+		} else if (channel.equals("playground")) {
+			httpServletResponse.setHeader("AMP-Access-Control-Allow-Source-Origin", "amp@gmail.dev");
+		}
+		httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
+		httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+		httpServletResponse.setHeader("Access-Control-Allow-Headers",
+				"origin, content-type, accept, x-requested-with, AMP-Access-Control-Allow-Source-Origin");
 		httpServletResponse.setHeader("Access-Control-Expose-Headers", "AMP-Access-Control-Allow-Source-Origin");
-	        httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
-	        httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-	        httpServletResponse.setHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with, AMP-Access-Control-Allow-Source-Origin");
-	        
-	        chain.doFilter(request, response);		
+		chain.doFilter(request, response);		
 	}
 
 	@Override
