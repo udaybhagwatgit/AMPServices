@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ampservices.exceptions.DuplicateUserException;
+import com.ampservices.exceptions.FieldEmptyException;
+import com.ampservices.exceptions.InvalidEmailException;
+import com.ampservices.exceptions.PasswordMismatchException;
 import com.ampservices.model.SignUpResponseModel;
 import com.ampservices.model.SignupRequestModel;
 import com.ampservices.service.SignupService;
@@ -28,11 +32,21 @@ public class AMPServicesController {
 
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<SignUpResponseModel> signUpUser(SignupRequestModel signupRequest) {
-		SignUpResponseModel responseObject = service.registerUser(signupRequest);
-		ResponseEntity<SignUpResponseModel> responseEntity = new ResponseEntity<SignUpResponseModel>(responseObject,
-				HttpStatus.OK);
+public ResponseEntity<SignUpResponseModel> signUpUser(SignupRequestModel signupRequest) throws DuplicateUserException, FieldEmptyException, InvalidEmailException, PasswordMismatchException {
+	ResponseEntity<SignUpResponseModel> responseEntity = null;
+	try {
+		responseEntity = service.registerUser(signupRequest);
 		return responseEntity;
+	} catch (DuplicateUserException e) {
+		throw new DuplicateUserException(signupRequest.getUserName());
+	} catch (FieldEmptyException ex) {
+		throw new FieldEmptyException(ex.getMessage());
+	} catch (InvalidEmailException exx) {
+		throw new InvalidEmailException(signupRequest.getEmailId());
+	} catch (PasswordMismatchException exxx) {
+		throw new PasswordMismatchException();
+	}
+
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/ampService/test")
