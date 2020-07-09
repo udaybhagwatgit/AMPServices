@@ -12,5 +12,8 @@ public interface RegisteredUsersRepository extends MongoRepository<RegisteredUse
 	
 	 @Query("{ $and: [{ 'emailId' : ?0 }]}")
 	 RegisteredUsers getUser(String emailId);
+	
+	 @Query("{ $and: [{ 'userName' : ?0 }]}")
+	 RegisteredUsers getUserByName(String userName);
 
 }
