@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ampservices.dao.PropertyInfo;
 import com.ampservices.model.LocationInfo;
+import com.ampservices.model.LocationsResponeModel;
 import com.ampservices.model.ReservationModel;
 import com.ampservices.mongorepositories.LocationInfoRepository;
 import com.ampservices.mongorepositories.PropertiesRepository;
@@ -19,10 +20,13 @@ public class ReservationService {
 	@Autowired ReservationRepository reservationRepository;
 	@Autowired LocationInfoRepository locationInfoRepository;
 	
-	public List<PropertyInfo> getAvailableProperties() {
+	public LocationsResponeModel getAvailableProperties() {
 		List<PropertyInfo> properties = propertiesRepository.getProperties();
-		return properties;
+		LocationsResponeModel locationsResponeModel = new LocationsResponeModel();
+		locationsResponeModel.setAvailableLocations(properties);
+		return locationsResponeModel;
 	}
+	
 	
 	public LocationInfo getLocationInfo(String locationId) {
 		LocationInfo locationInfo = locationInfoRepository.getLocationInfo(locationId);
