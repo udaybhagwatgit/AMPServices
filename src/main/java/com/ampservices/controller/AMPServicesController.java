@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ampservices.dao.PropertyInfo;
 import com.ampservices.model.LocationInfo;
 import com.ampservices.model.ReservationModel;
+import com.ampservices.model.LocationsResponeModel;
 import com.ampservices.service.ReservationService;
 import com.ampservices.exceptions.DuplicateUserException;
 import com.ampservices.exceptions.FieldEmptyException;
@@ -61,10 +62,10 @@ public class AMPServicesController {
 		return responseEntity;
 	}
 	
-		@RequestMapping(method = RequestMethod.GET, value = "/ampService/getAvailableProperties")
-	public ResponseEntity<List<PropertyInfo>> getPropertyList() {
-		List<PropertyInfo> properties = reservationService.getAvailableProperties();
-		ResponseEntity<List<PropertyInfo>> responseEntity = new ResponseEntity<List<PropertyInfo>>(properties,
+	@RequestMapping(method = RequestMethod.GET, value = "/ampService/getAvailableProperties")
+	public ResponseEntity<LocationsResponeModel> getPropertyList() {
+		LocationsResponeModel properties = reservationService.getAvailableProperties();
+		ResponseEntity<LocationsResponeModel> responseEntity = new ResponseEntity<LocationsResponeModel>(properties,
 				HttpStatus.OK);
 		return responseEntity;
 	}
