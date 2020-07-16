@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ampservices.dao.PropertyInfo;
+import com.ampservices.model.LocationInfo;
+import com.ampservices.model.ReservationModel;
+import com.ampservices.service.ReservationService;
 import com.ampservices.exceptions.DuplicateUserException;
 import com.ampservices.exceptions.FieldEmptyException;
 import com.ampservices.exceptions.InvalidEmailException;
@@ -29,6 +33,7 @@ public class AMPServicesController {
 
 	@Autowired
 	SignupService service;
+	@Autowired ReservationService reservationService;
 
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,6 +58,31 @@ public class AMPServicesController {
 	public ResponseEntity<String> testUser() {
 		String responseObject = "Hello AMP Test";
 		ResponseEntity<String> responseEntity = new ResponseEntity<String>(responseObject, HttpStatus.OK);
+		return responseEntity;
+	}
+	
+		@RequestMapping(method = RequestMethod.GET, value = "/ampService/getAvailableProperties")
+	public ResponseEntity<List<PropertyInfo>> getPropertyList() {
+		List<PropertyInfo> properties = reservationService.getAvailableProperties();
+		ResponseEntity<List<PropertyInfo>> responseEntity = new ResponseEntity<List<PropertyInfo>>(properties,
+				HttpStatus.OK);
+		return responseEntity;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/ampService/getLocationInfo/{locationId}")
+	public ResponseEntity<LocationInfo> getLocationInfo(@PathVariable final String locationId) {
+		LocationInfo locationInfo = reservationService.getLocationInfo(locationId);
+		ResponseEntity<LocationInfo> responseEntity = new ResponseEntity<LocationInfo>(locationInfo,
+				HttpStatus.OK);
+		return responseEntity;
+	}
+
+
+	@RequestMapping(method = RequestMethod.POST, value = "/ampService/reserveRoom")
+	public ResponseEntity<ReservationModel> reserveRoom(@RequestBody ReservationModel reservationModel) {
+		ReservationModel reservation = reservationService.reserveRoom(reservationModel);
+		ResponseEntity<ReservationModel> responseEntity = new ResponseEntity<ReservationModel>(
+				reservation, HttpStatus.OK);
 		return responseEntity;
 	}
 
