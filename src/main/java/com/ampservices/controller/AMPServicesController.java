@@ -79,7 +79,7 @@ public class AMPServicesController {
 
 
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/reserveRoom")
-	public ResponseEntity<ReservationModel> reserveRoom(@RequestBody ReservationModel reservationModel) {
+	public ResponseEntity<ReservationModel> reserveRoom(ReservationModel reservationModel) {
 		ReservationModel reservation = reservationService.reserveRoom(reservationModel);
 		ResponseEntity<ReservationModel> responseEntity = new ResponseEntity<ReservationModel>(
 				reservation, HttpStatus.OK);
