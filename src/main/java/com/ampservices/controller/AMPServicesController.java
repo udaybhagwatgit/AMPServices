@@ -93,7 +93,7 @@ public class AMPServicesController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/postSurvey")
-	public ResponseEntity<SurveyResponse> postSurvey(SurveyRequest surveyRequest) {
+	public ResponseEntity<SurveyResponse> postSurvey(SurveyRequest surveyRequest) throws FieldEmptyException {
 		SurveyResponse surveyResponse = surveyService.postSurvey(surveyRequest);
 		ResponseEntity<SurveyResponse> responseEntity = new ResponseEntity<SurveyResponse>(
 				surveyResponse, HttpStatus.OK);
