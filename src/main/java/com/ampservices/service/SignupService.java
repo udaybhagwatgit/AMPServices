@@ -32,13 +32,13 @@ public class SignupService {
 		
 		//Validate the request
 		if(StringUtils.isEmpty(signupRequest.getUserName())) {
-			throw new FieldEmptyException("User Name");
+			throw new FieldEmptyException("User Name is required!");
 		} else if(StringUtils.isEmpty(signupRequest.getEmailId())) {
-			throw new FieldEmptyException("Email Id");
+			throw new FieldEmptyException("Email Id is required!");
 		} else if(StringUtils.isEmpty(signupRequest.getPassword())) {
-			throw new FieldEmptyException("Password");
+			throw new FieldEmptyException("Password is required!");
 		} else if(StringUtils.isEmpty(signupRequest.getConfirmPassword())) {
-			throw new FieldEmptyException("Confirm Password");
+			throw new FieldEmptyException("Confirm Password is required!");
 		} 
 		
 		String emailId = signupRequest.getEmailId();
