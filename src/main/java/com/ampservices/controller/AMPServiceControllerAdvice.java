@@ -47,7 +47,7 @@ public class AMPServiceControllerAdvice {
 			final HttpServletRequest request) {
 
 		SignUpErrorsResponseModel error = new SignUpErrorsResponseModel();
-		error.setMessage(exception.getMessage() + " is required!");
+		error.setMessage(exception.getMessage());
 		error.setUri(request.getRequestURI());
 
 		return error;
