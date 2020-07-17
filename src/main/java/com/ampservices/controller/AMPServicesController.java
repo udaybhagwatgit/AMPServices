@@ -28,6 +28,9 @@ import com.ampservices.exceptions.PasswordMismatchException;
 import com.ampservices.model.SignUpResponseModel;
 import com.ampservices.model.SignupRequestModel;
 import com.ampservices.service.SignupService;
+import com.ampservices.service.SurveyService;
+import com.ampservices.model.SurveyRequest;
+import com.ampservices.dao.SurveyResponse;
 
 @RestController
 public class AMPServicesController {
@@ -35,6 +38,8 @@ public class AMPServicesController {
 	@Autowired
 	SignupService service;
 	@Autowired ReservationService reservationService;
+	@Autowired
+	SurveyService surveyService;
 
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/ampService/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -86,5 +91,14 @@ public class AMPServicesController {
 				reservation, HttpStatus.OK);
 		return responseEntity;
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/ampService/postSurvey")
+	public ResponseEntity<SurveyResponse> postSurvey(SurveyRequest surveyRequest) {
+		SurveyResponse surveyResponse = surveyService.postSurvey(surveyRequest);
+		ResponseEntity<SurveyResponse> responseEntity = new ResponseEntity<SurveyResponse>(
+				surveyResponse, HttpStatus.OK);
+		return responseEntity;
+	}
+
 
 }
